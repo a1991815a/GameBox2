@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="GameBox">
+      <UniqueIdentifier>{69f47033-bfb6-40e7-b5c5-33013d9c4a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\头文件">
+      <UniqueIdentifier>{215fdec3-bd8c-49c4-8171-a9b35200e306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="GameBox\工具">
+      <UniqueIdentifier>{676ee043-0774-4b83-a108-fd9e15ad506b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="容器结构">
+      <UniqueIdentifier>{c83a9f9a-40e5-479b-a962-3414e0f28d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="容器结构\数据结构">
+      <UniqueIdentifier>{749f465d-2572-4d9e-953c-ed5a17104311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="容器结构\内存容器">
+      <UniqueIdentifier>{6ef1b0ea-c94b-4101-8fe5-f96f015e2985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="容器结构\几何模型">
+      <UniqueIdentifier>{6e6eed42-62b7-423b-b006-d160894b516f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块">
+      <UniqueIdentifier>{209dbb1f-996e-4b26-833e-a59b6e8bc1f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\渲染引擎">
+      <UniqueIdentifier>{1b544f70-5cd7-430d-9e02-73c7e9793376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\系统管理器%28主模块%29">
+      <UniqueIdentifier>{fdb851f4-0d23-4448-907f-bf458a2118af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\工具\debug工具">
+      <UniqueIdentifier>{4adec3e0-7e85-4eea-9ce3-35722b7db2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\应用">
+      <UniqueIdentifier>{edaaf4f4-ed5e-4a45-b547-a2c64d643e91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\计时器系统">
+      <UniqueIdentifier>{c7d23d30-f108-410c-9da2-e06777a8a067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\计时器系统\计时器">
+      <UniqueIdentifier>{3d4c8e8e-cf4f-4f57-9fc7-515c8f37fdbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\输入系统">
+      <UniqueIdentifier>{b03113b6-8303-47be-a444-494bd3f1c3fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\消息分发系统">
+      <UniqueIdentifier>{109d3a77-6689-43c9-a9f8-32e4a39ea5a4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RenderEngine\D3DXRenderEngine.h">
+      <Filter>GameBox\子模块\渲染引擎</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderEngine\DXMathUtils.h">
+      <Filter>GameBox\子模块\渲染引擎</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderEngine\DXUtils.h">
+      <Filter>GameBox\子模块\渲染引擎</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHeader.h">
+      <Filter>GameBox\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMacro.h">
+      <Filter>GameBox\头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GApplication.h">
+      <Filter>GameBox\应用</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruct\GQuadTree.h">
+      <Filter>容器结构\数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruct\GString.h">
+      <Filter>容器结构\数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStruct\ObjectPool.hpp">
+      <Filter>容器结构\数据结构</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\Map.hpp">
+      <Filter>容器结构\内存容器</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\Set.h">
+      <Filter>容器结构\内存容器</Filter>
+    </ClInclude>
+    <ClInclude Include="Container\Vector.hpp">
+      <Filter>容器结构\内存容器</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Point.h">
+      <Filter>容器结构\几何模型</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Rect2D.h">
+      <Filter>容器结构\几何模型</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Rect3D.h">
+      <Filter>容器结构\几何模型</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Size.h">
+      <Filter>容器结构\几何模型</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleInstance.h">
+      <Filter>GameBox\工具</Filter>
+    </ClInclude>
+    <ClInclude Include="GSystemEngine.h">
+      <Filter>GameBox\系统管理器%28主模块%29</Filter>
+    </ClInclude>
+    <ClInclude Include="GTimerSystem.h">
+      <Filter>GameBox\子模块\计时器系统</Filter>
+    </ClInclude>
+    <ClInclude Include="GTimer.h">
+      <Filter>GameBox\子模块\计时器系统\计时器</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugUtils.h">
+      <Filter>GameBox\工具\debug工具</Filter>
+    </ClInclude>
+    <ClInclude Include="GSystem.h">
+      <Filter>GameBox\子模块</Filter>
+    </ClInclude>
+    <ClInclude Include="GInputSystem.h">
+      <Filter>GameBox\子模块\输入系统</Filter>
+    </ClInclude>
+    <ClInclude Include="DispatchSystem.h">
+      <Filter>GameBox\子模块\消息分发系统</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderEngine\D3DXRenderEngine.cpp">
+      <Filter>GameBox\子模块\渲染引擎</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderEngine\DXMathUtils.cpp">
+      <Filter>GameBox\子模块\渲染引擎</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderEngine\DXUtils.cpp">
+      <Filter>GameBox\子模块\渲染引擎</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Rect2D.cpp">
+      <Filter>容器结构\几何模型</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Rect3D.cpp">
+      <Filter>容器结构\几何模型</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Size.cpp">
+      <Filter>容器结构\几何模型</Filter>
+    </ClCompile>
+    <ClCompile Include="GApplication.cpp">
+      <Filter>GameBox\应用</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="WinCreate.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="WinDestroy.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="WinLoop.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="GSystemEngine.cpp">
+      <Filter>GameBox\系统管理器%28主模块%29</Filter>
+    </ClCompile>
+    <ClCompile Include="GTimerSystem.cpp">
+      <Filter>GameBox\子模块\计时器系统</Filter>
+    </ClCompile>
+    <ClCompile Include="GTimer.cpp">
+      <Filter>GameBox\子模块\计时器系统\计时器</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugUtils.cpp">
+      <Filter>GameBox\工具\debug工具</Filter>
+    </ClCompile>
+    <ClCompile Include="GInputSystem.cpp">
+      <Filter>GameBox\子模块\输入系统</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
