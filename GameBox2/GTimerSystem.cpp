@@ -27,7 +27,7 @@ float GTimerSystem::GetElapse() const
 	return (float)(m_dwCurTime - m_dwPreTime) / CLOCKS_PER_SEC;
 }
 
-void GTimerSystem::Refresh()
+void GTimerSystem::Loop()
 {
 	m_dwPreTime = m_dwCurTime;
 	m_dwCurTime = GetTickCount();

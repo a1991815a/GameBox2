@@ -21,7 +21,7 @@ bool dxInit(HWND hwnd)
 	parameters.BackBufferCount = 1;
 	parameters.BackBufferFormat = D3DFMT_X8R8G8B8;
 	parameters.EnableAutoDepthStencil = TRUE;
-	parameters.AutoDepthStencilFormat = D3DFMT_D24X8;
+	parameters.AutoDepthStencilFormat = D3DFMT_D24S8;
 	parameters.hDeviceWindow = hwnd;
 	parameters.Windowed = TRUE;
 	parameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
@@ -49,7 +49,7 @@ bool dxInit(HWND hwnd)
 	float height = rect.bottom - rect.top;
 
 	//设置视图和投影矩阵
-	dxSetView(0, 10, -10, 0, 10, 0, 0, 1, 0);
+	dxSetView(0, 0, -10, 0, 0, 0, 0, 1, 0);
 	dxSetProjection(D3DX_PI / 4, width / height, 1, 500);
 
 	return SUCCEEDED(result);

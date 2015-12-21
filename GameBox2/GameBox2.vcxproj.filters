@@ -33,9 +33,6 @@
     <Filter Include="GameBox\子模块">
       <UniqueIdentifier>{209dbb1f-996e-4b26-833e-a59b6e8bc1f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameBox\子模块\渲染引擎">
-      <UniqueIdentifier>{1b544f70-5cd7-430d-9e02-73c7e9793376}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameBox\系统管理器%28主模块%29">
       <UniqueIdentifier>{fdb851f4-0d23-4448-907f-bf458a2118af}</UniqueIdentifier>
     </Filter>
@@ -57,16 +54,61 @@
     <Filter Include="GameBox\子模块\消息分发系统">
       <UniqueIdentifier>{109d3a77-6689-43c9-a9f8-32e4a39ea5a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameBox\子模块\消息分发系统\事件">
+      <UniqueIdentifier>{8495a96b-f28b-4353-a713-f833e1498f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\消息分发系统\监听器">
+      <UniqueIdentifier>{a9040a4b-d0ae-43b7-bd9b-fe24caaeaf55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\消息分发系统\监听器\键盘监听器">
+      <UniqueIdentifier>{dd57bfee-5d41-4f15-b8fe-cd049ca9cebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\消息分发系统\监听器\鼠标监听器">
+      <UniqueIdentifier>{d9c61e02-22be-49fd-b494-b937e3f9a9d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\渲染引擎">
+      <UniqueIdentifier>{1b544f70-5cd7-430d-9e02-73c7e9793376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统">
+      <UniqueIdentifier>{ea9d36fb-8331-42aa-85a8-44bac9c82629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统\游戏实体模型">
+      <UniqueIdentifier>{49884c39-02fc-42bc-9d05-6c4747733825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统\挂载节点">
+      <UniqueIdentifier>{7c69adb6-6742-409a-aa7d-233ba999642f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\资源">
+      <UniqueIdentifier>{aa6d92fb-b0b7-4dc6-a0fc-8bc582638aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\内存管理系统">
+      <UniqueIdentifier>{932ae961-82ba-4fbf-817e-928788eb8b97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\渲染引擎\顶点格式">
+      <UniqueIdentifier>{3b8d7000-119b-4f5b-a6e3-5b1008a7c73f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统\游戏主要对象">
+      <UniqueIdentifier>{473a93e5-3652-498a-af46-dad73fb4ac8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统\摄像机">
+      <UniqueIdentifier>{41778d58-f45a-4101-a4f3-c51366bc2597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统\场景">
+      <UniqueIdentifier>{3632a300-b441-45f7-b90b-1e1c429c9fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBox\子模块\绘制系统\绘制管理器">
+      <UniqueIdentifier>{c3ad7228-ce68-4cb3-8e61-a83403237e8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderEngine\D3DXRenderEngine.h">
-      <Filter>GameBox\子模块\渲染引擎</Filter>
+      <Filter>GameBox\渲染引擎</Filter>
     </ClInclude>
     <ClInclude Include="RenderEngine\DXMathUtils.h">
-      <Filter>GameBox\子模块\渲染引擎</Filter>
+      <Filter>GameBox\渲染引擎</Filter>
     </ClInclude>
     <ClInclude Include="RenderEngine\DXUtils.h">
-      <Filter>GameBox\子模块\渲染引擎</Filter>
+      <Filter>GameBox\渲染引擎</Filter>
     </ClInclude>
     <ClInclude Include="GameHeader.h">
       <Filter>GameBox\头文件</Filter>
@@ -128,19 +170,79 @@
     <ClInclude Include="GInputSystem.h">
       <Filter>GameBox\子模块\输入系统</Filter>
     </ClInclude>
-    <ClInclude Include="DispatchSystem.h">
+    <ClInclude Include="GEvent.h">
+      <Filter>GameBox\子模块\消息分发系统\事件</Filter>
+    </ClInclude>
+    <ClInclude Include="GEventType.h">
+      <Filter>GameBox\子模块\消息分发系统\事件</Filter>
+    </ClInclude>
+    <ClInclude Include="GListener.h">
+      <Filter>GameBox\子模块\消息分发系统\监听器</Filter>
+    </ClInclude>
+    <ClInclude Include="GKeyboardListener.h">
+      <Filter>GameBox\子模块\消息分发系统\监听器\键盘监听器</Filter>
+    </ClInclude>
+    <ClInclude Include="GMouseListener.h">
+      <Filter>GameBox\子模块\消息分发系统\监听器\鼠标监听器</Filter>
+    </ClInclude>
+    <ClInclude Include="GDispatchSystem.h">
       <Filter>GameBox\子模块\消息分发系统</Filter>
+    </ClInclude>
+    <ClInclude Include="GObject.h">
+      <Filter>GameBox\子模块\绘制系统\游戏实体模型</Filter>
+    </ClInclude>
+    <ClInclude Include="GNode.h">
+      <Filter>GameBox\子模块\绘制系统\挂载节点</Filter>
+    </ClInclude>
+    <ClInclude Include="GObjectType.h">
+      <Filter>GameBox\子模块\绘制系统</Filter>
+    </ClInclude>
+    <ClInclude Include="GObjectRendable.h">
+      <Filter>GameBox\子模块\绘制系统\游戏实体模型</Filter>
+    </ClInclude>
+    <ClInclude Include="GResource.h">
+      <Filter>GameBox\子模块\资源</Filter>
+    </ClInclude>
+    <ClInclude Include="GTexture.h">
+      <Filter>GameBox\子模块\资源</Filter>
+    </ClInclude>
+    <ClInclude Include="Ref.h">
+      <Filter>GameBox\子模块\内存管理系统</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryPool.h">
+      <Filter>GameBox\子模块\内存管理系统</Filter>
+    </ClInclude>
+    <ClInclude Include="MemorySystem.h">
+      <Filter>GameBox\子模块\内存管理系统</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>GameBox\渲染引擎\顶点格式</Filter>
+    </ClInclude>
+    <ClInclude Include="GSkybox.h">
+      <Filter>GameBox\子模块\绘制系统\游戏主要对象</Filter>
+    </ClInclude>
+    <ClInclude Include="GTerrian.h">
+      <Filter>GameBox\子模块\绘制系统\游戏主要对象</Filter>
+    </ClInclude>
+    <ClInclude Include="GCamera.h">
+      <Filter>GameBox\子模块\绘制系统\摄像机</Filter>
+    </ClInclude>
+    <ClInclude Include="GScene.h">
+      <Filter>GameBox\子模块\绘制系统\场景</Filter>
+    </ClInclude>
+    <ClInclude Include="GSceneManager.h">
+      <Filter>GameBox\子模块\绘制系统\绘制管理器</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RenderEngine\D3DXRenderEngine.cpp">
-      <Filter>GameBox\子模块\渲染引擎</Filter>
+      <Filter>GameBox\渲染引擎</Filter>
     </ClCompile>
     <ClCompile Include="RenderEngine\DXMathUtils.cpp">
-      <Filter>GameBox\子模块\渲染引擎</Filter>
+      <Filter>GameBox\渲染引擎</Filter>
     </ClCompile>
     <ClCompile Include="RenderEngine\DXUtils.cpp">
-      <Filter>GameBox\子模块\渲染引擎</Filter>
+      <Filter>GameBox\渲染引擎</Filter>
     </ClCompile>
     <ClCompile Include="Math\Rect2D.cpp">
       <Filter>容器结构\几何模型</Filter>
@@ -180,6 +282,57 @@
     </ClCompile>
     <ClCompile Include="GInputSystem.cpp">
       <Filter>GameBox\子模块\输入系统</Filter>
+    </ClCompile>
+    <ClCompile Include="GEvent.cpp">
+      <Filter>GameBox\子模块\消息分发系统\事件</Filter>
+    </ClCompile>
+    <ClCompile Include="GListener.cpp">
+      <Filter>GameBox\子模块\消息分发系统\监听器</Filter>
+    </ClCompile>
+    <ClCompile Include="GKeyboardListener.cpp">
+      <Filter>GameBox\子模块\消息分发系统\监听器\键盘监听器</Filter>
+    </ClCompile>
+    <ClCompile Include="GMouseListener.cpp">
+      <Filter>GameBox\子模块\消息分发系统\监听器\鼠标监听器</Filter>
+    </ClCompile>
+    <ClCompile Include="GDispatchSystem.cpp">
+      <Filter>GameBox\子模块\消息分发系统</Filter>
+    </ClCompile>
+    <ClCompile Include="GObjectRendable.cpp">
+      <Filter>GameBox\子模块\绘制系统\游戏实体模型</Filter>
+    </ClCompile>
+    <ClCompile Include="GTexture.cpp">
+      <Filter>GameBox\子模块\资源</Filter>
+    </ClCompile>
+    <ClCompile Include="MemorySystem.cpp">
+      <Filter>GameBox\子模块\内存管理系统</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryPool.cpp">
+      <Filter>GameBox\子模块\内存管理系统</Filter>
+    </ClCompile>
+    <ClCompile Include="Ref.cpp">
+      <Filter>GameBox\子模块\内存管理系统</Filter>
+    </ClCompile>
+    <ClCompile Include="GNode.cpp">
+      <Filter>GameBox\子模块\绘制系统\挂载节点</Filter>
+    </ClCompile>
+    <ClCompile Include="GTerrian.cpp">
+      <Filter>GameBox\子模块\绘制系统\游戏主要对象</Filter>
+    </ClCompile>
+    <ClCompile Include="GSkybox.cpp">
+      <Filter>GameBox\子模块\绘制系统\游戏主要对象</Filter>
+    </ClCompile>
+    <ClCompile Include="GCamera.cpp">
+      <Filter>GameBox\子模块\绘制系统\摄像机</Filter>
+    </ClCompile>
+    <ClCompile Include="GScene.cpp">
+      <Filter>GameBox\子模块\绘制系统\场景</Filter>
+    </ClCompile>
+    <ClCompile Include="GObject.cpp">
+      <Filter>GameBox\子模块\绘制系统\游戏实体模型</Filter>
+    </ClCompile>
+    <ClCompile Include="GSceneManager.cpp">
+      <Filter>GameBox\子模块\绘制系统\绘制管理器</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

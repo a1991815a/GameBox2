@@ -1,0 +1,15 @@
+#ifndef __GOBJECTTYPE__
+#define __GOBJECTTYPE__
+
+enum GObjectType {
+	GOT_NONE,
+	GOT_RENDABLE,
+	GOT_TEERIAN,
+	GOT_SKYBOX,
+
+
+
+	GOT_CAMERA,
+	GOT_SCENE
+};
+#endif

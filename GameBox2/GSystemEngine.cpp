@@ -1,5 +1,9 @@
 #include "GSystemEngine.h"
 #include "GTimerSystem.h"
+#include "GInputSystem.h"
+#include "GDispatchSystem.h"
+#include "MemorySystem.h"
+#include "GSceneManager.h"
 
 
 
@@ -11,7 +15,11 @@ GSystemEngine::~GSystemEngine()
 
 void GSystemEngine::InitEngine()
 {
-	addSystem(_timerSystem);
+	addSystem(GTimerSystem::getInstance());
+	addSystem(GInputSystem::getInstance());
+	addSystem(GDispatchSystem::getInstance());
+	addSystem(MemorySystem::getInstance());
+	addSystem(GSceneManager::getInstance());
 }
 
 void GSystemEngine::Init()
@@ -21,7 +29,7 @@ void GSystemEngine::Init()
 	{
 		GSystem* system = *itor;
 		system->Init();
-		LOG_D("启动子系统: %s", system->getSysName().c_str());
+		LOG_D("启动子系统: %s, 优先级: %d", system->getSysName().c_str(), system->getPriority());
 	}
 }
 
@@ -32,7 +40,7 @@ void GSystemEngine::Destroy()
 	{
 		GSystem* system = *itor;
 		system->Destroy();
-		LOG_D("销毁子系统: %s", system->getSysName().c_str());
+		LOG_D("销毁子系统: %s, 优先级: %d", system->getSysName().c_str(), system->getPriority());
 	}
 	m_pSystemVector.clear();
 }

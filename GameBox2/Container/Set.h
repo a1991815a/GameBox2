@@ -45,7 +45,7 @@ public:
 	};
 	typename iterator erase(typename iterator itor) {
 		(*itor)->release();
-		m_sRefSet.erase(itor);
+		return m_sRefSet.erase(itor);
 	};
 	void clear() {
 		auto itor = m_sRefSet.begin();

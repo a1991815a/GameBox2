@@ -7,17 +7,6 @@
 #define SAFE_DELETE(p) do{if(p) delete p; p = nullptr; } while(0)
 #define SAFE_DELETE_ARRAY(p) do{if(p) delete[] p; p = nullptr; } while(0)
 
-#define CREATE_FUNC(TYPE) \
-static TYPE* create(){ \
-	TYPE* ret = new TYPE(); \
-	if(ret && ret->init()){ \
-		ret->autorelease(); \
-		return ret; \
-	} \
-	delete ret; \
-	return ret; \
-};
-
 #define GASSERT(cond, msg, ...) \
 	if(!(cond)) \
 	_CrtDbgReport(\

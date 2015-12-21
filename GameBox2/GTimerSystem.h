@@ -15,7 +15,7 @@ public:
 	virtual void Destroy();
 
 	float GetElapse() const;
-	void Refresh();
+	void Loop();
 
 
 	

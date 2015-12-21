@@ -93,7 +93,8 @@ public:
 	};
 	void erase(size_t offset) {
 		_Ty& val = m_vRefVector.at(offset);
-		val->release();
+		if (val)
+			val->release();
 		m_vRefVector.erase(m_vRefVector.begin() + offset);
 	};
 	void erase(const _Ty& val) {
@@ -109,13 +110,15 @@ public:
 		m_vRefVector.push_back(itor);
 	};
 	void erase(typename iterator itor) {
-		(*itor)->release();
+		if (*itor)
+			(*itor)->release();
 		m_vRefVector.erase(itor);
 	};
 	void clear() {
 		auto itor = m_vRefVector.begin();
 		for (; itor != m_vRefVector.end(); ++itor)
-			(*itor)->release();
+			if(*itor)
+				(*itor)->release();
 		m_vRefVector.clear();
 	};
 

@@ -11,7 +11,12 @@
 /*******************************/
 //数学模型及其他模型
 #include "Math/Size.h"
+#include "Math/Point.h"
+#include "Math/Rect2D.h"
+#include "Math/Rect3D.h"
 #include "nocopy.h"
+//顶点格式
+#include "Vertex.h"
 //内存管理容器
 #include "Container/Map.hpp"
 #include "Container/Vector.hpp"

@@ -1,6 +1,9 @@
 #include "GApplication.h"
 #include <iostream>
 
+#pragma warning(push)
+#pragma warning(disable: 4244)
+
 #define MSG_OUT(MSG) std::cout << MSG << std::endl;
 
 extern bool WinCreate(HWND hwnd);
@@ -41,6 +44,11 @@ GApplication::GApplication( const GString& name, int x, int y, int cx, int cy )
 	if(m_hWnd == nullptr)
 		MSG_OUT("CreateWindowExA error!");
 
+
+	if (!WinCreate(m_hWnd))
+		DestroyWindow();
+	::UnregisterClassA(name.c_str(), GetModuleHandleA(nullptr));
+
 	result = ::ShowWindow(m_hWnd, SW_SHOWNORMAL);
 	if(FAILED(result))
 		MSG_OUT("ShowWindow error!");
@@ -50,9 +58,13 @@ GApplication::GApplication( const GString& name, int x, int y, int cx, int cy )
 
 
 
-	if(!WinCreate(m_hWnd))
-		DestroyWindow();
-	::UnregisterClassA(name.c_str(), GetModuleHandleA(nullptr));
+
+
+	m_strName = name;
+	RECT clientRect = { 0 };
+	::GetClientRect(m_hWnd, &clientRect);
+	m_ClientSize.width = clientRect.right - clientRect.left;
+	m_ClientSize.height = clientRect.bottom - clientRect.top;
 }
 
 GApplication::~GApplication()
@@ -89,15 +101,15 @@ void GApplication::Exit()
 	PostQuitMessage(0);
 }
 
-void GApplication::RegisterProcess( GWinProcessor* instance, process_t func )
+void GApplication::RegisterProcess( void* instance, process_t func )
 {
 	GWINPROCESS process;
-	process.instance = instance;
+	process.instance = (GWinProcessor*)instance;
 	process.callback = func;
 	m_WinProcessVector.push_back(process);
 }
 
-void GApplication::UnregisterProcess( GWinProcessor* instance )
+void GApplication::UnregisterProcess( void* instance )
 {
 	auto itor = m_WinProcessVector.begin();
 	for (; itor != m_WinProcessVector.end(); ++itor)
@@ -129,3 +141,11 @@ LRESULT CALLBACK WndProc( HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam 
 
 	return 0;
 }
+
+GApplication* dxGetApp()
+{
+	return GApplication::s_pApplication;
+}
+
+
+#pragma warning(pop)

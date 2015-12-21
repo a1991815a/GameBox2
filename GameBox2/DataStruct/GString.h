@@ -54,6 +54,11 @@ public:
 	~GBasic_String()
 	{};
 
+	const GBasic_String operator=(const GBasic_String<_Elem>& _val) {
+		this->_Mybase::operator=(_val);
+		return *this;
+	};
+
 	GBasic_String operator+(const GBasic_String<_Elem>& _Val) const{
 		GBasic_String str = *this;
 		str._Mybase::operator+=(_Val);
@@ -125,11 +130,11 @@ namespace std{
 	struct hash<GBasic_String<_Elem>>{
 		typedef GBasic_String<_Elem>	_Kty;					//散列对象
 		typedef GBasic_String<_Elem>	argument_type;			//参数类型
-		typedef size_t			result_type;			//返回值类型
+		typedef size_t					result_type;			//返回值类型
 
 		inline size_t operator()(const _Kty& _Keyval) const
 		{	// hash _Keyval to size_t value by pseudorandomizing transform
-			return (hash<basic_string<_Elem>>((const unsigned char *)_Keyval.c_str(),
+			return (_Hash_seq((const unsigned char *)_Keyval.c_str(),
 				_Keyval.size() * sizeof (_Elem)));
 		}
 	};

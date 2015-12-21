@@ -1,8 +1,16 @@
 #include "GInputSystem.h"
-#include "GApplication.h"
+#include "GDispatchSystem.h"
+
+#pragma comment(lib, "dinput8.lib")
+#pragma comment(lib, "dxguid.lib")
+
+#pragma warning(push)
+#pragma warning(disable: 4407)
+#pragma warning(disable: 4267)
+#pragma warning(disable: 4244)
 
 #define FAILED_THORW(cond, msg) \
-while(!(cond)) throw std::runtime_error(msg)
+while(FAILED(cond)) throw std::runtime_error(msg)
 
 GInputSystem::GInputSystem()
 	:GSystem(10, "GInputSystem(输入系统)"),
@@ -13,9 +21,9 @@ GInputSystem::GInputSystem()
 
 bool GInputSystem::Acquire()
 {
-	if (!m_pMouseDevice->Acquire())
+	if (FAILED(m_pMouseDevice->Acquire()))
 		return false;
-	if (!m_pKeyboardDevice->Acquire())
+	if (FAILED(m_pKeyboardDevice->Acquire()))
 		return false;
 	return true;
 }
@@ -31,16 +39,18 @@ bool GInputSystem::UnAcquire()
 
 bool GInputSystem::Init()
 {
-	//DInput8接口创建
 	HRESULT result = S_OK;
-	result = DirectInput8Create(
-		GetModuleHandleA(nullptr),
-		DIRECTINPUT_VERSION,
-		IID_IDirectInput8A,
-		(void**)&m_pDInput,
-		nullptr
-		);
-	FAILED_THORW(result, "DirectInput8Create");
+	//DInput8接口创建
+	{
+		result = DirectInput8Create(
+			GetModuleHandleA(nullptr),
+			DIRECTINPUT_VERSION,
+			IID_IDirectInput8A,
+			(void**)&m_pDInput,
+			nullptr
+			);
+		FAILED_THORW(result, "DirectInput8Create");
+	}
 	
 	//键盘设备创建
 	{
@@ -70,7 +80,7 @@ bool GInputSystem::Init()
 		FAILED_THORW(result, "SetDataFormat: Mouse");
 		result = m_pMouseDevice->SetCooperativeLevel(
 			dxGetApp()->getWindow(),
-			DISCL_FOREGROUND | DISCL_EXCLUSIVE
+			DISCL_FOREGROUND | DISCL_NONEXCLUSIVE
 			);
 		FAILED_THORW(result, "SetCooperativeLevel: Mouse");
 	};
@@ -87,18 +97,71 @@ bool GInputSystem::Init()
 		memset(m_pCurMouseState, 0, sizeof(DIMOUSESTATE2));
 	}
 
-	dxGetApp()->RegisterProcess((GWinProcessor*)this, GPROC_CALLBACK(GInputSystem::InputProcess));
-	Acquire();
+	//注册Windows消息例程
+	dxGetApp()->RegisterProcess(this, GPROC_CALLBACK(GInputSystem::InputProcess));
+// 	//获得权限
+// 	Acquire();
 
 
 	return true;
 }
 
-void GInputSystem::ReadyData()
+bool GInputSystem::ReadyData()
 {
-	SwapBuf();
-	m_pKeyboardDevice->GetDeviceState(GINPUT_KEYSIZE, (void*)&m_pCurKeyBuf);
-	m_pMouseDevice->GetDeviceState(sizeof(DIMOUSESTATE2), (void*)&m_pCurMouseState);
+	HRESULT result = 0;
+	
+	result = m_pKeyboardDevice->GetDeviceState(GINPUT_KEYSIZE, (void*)m_pPreKeyBuf);
+	if (FAILED(result))
+		return false;
+	SwapKeyBuf();
+	result = m_pMouseDevice->GetDeviceState(sizeof(DIMOUSESTATE2), (void*)m_pPreMoustState);
+	if (FAILED(result))
+		return false;
+	SwapMouseBuf();
+
+	return true;
+}
+
+void GInputSystem::Loop()
+{
+	if(!ReadyData())
+		return;
+
+	for (size_t i = 0; i < GINPUT_KEYSIZE; ++i)
+	{
+		if (m_pCurKeyBuf[i] & 0x80)								//本次按下 则发送按下信息
+			_dispatchSystem->postKeyEvent(KET_KEYDOWN, i);
+		else if (m_pPreKeyBuf[i] & 0x80)						//上次按下但本次弹起 则发送弹起信息
+			_dispatchSystem->postKeyEvent(KET_KEYUP, i);
+	}
+
+	if (m_pCurMouseState->rgbButtons[0] & 0x80)						//左键
+		_dispatchSystem->postMoustEvent(MET_LBDOWN);
+	else if(m_pPreMoustState->rgbButtons[0] & 0x80)
+		_dispatchSystem->postMoustEvent(MET_LBUP);
+
+	if (m_pCurMouseState->rgbButtons[1] & 0x80)						//右键
+		_dispatchSystem->postMoustEvent(MET_RBDOWN);
+	else if (m_pPreMoustState->rgbButtons[1] & 0x80)
+		_dispatchSystem->postMoustEvent(MET_RBUP);
+	
+	if (m_pCurMouseState->lX != 0 ||
+		m_pCurMouseState->lY != 0)				//鼠标移动
+	{
+		_dispatchSystem->postMoustEvent(MET_MOVE);
+		POINT point;
+		GetCursorPos(&point);
+		ScreenToClient(dxGetApp()->getWindow(), &point);
+		_dispatchSystem->m_CurLocation = Point(
+			point.x,
+			point.y
+			);															//刷新消息分发的鼠标位置
+	}
+
+	_dispatchSystem->m_MoveLocation = Point(
+		m_pCurMouseState->lX,
+		m_pCurMouseState->lY
+		);															//刷新消息分发的鼠标位移
 }
 
 void GInputSystem::Destroy()
@@ -119,33 +182,35 @@ void GInputSystem::Destroy()
 
 bool GInputSystem::InputProcess(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch (message)
+	if (message == WM_ACTIVATE && wParam == WA_ACTIVE)
 	{
-	case WM_ACTIVATE:
-		switch (wParam)
+		bool result = Acquire();
+		if (result)
 		{
-		case WA_ACTIVE:
-			Acquire();
-			break;
-		case WA_INACTIVE:
-			UnAcquire();
-			break;
-		default:
-			break;
+			LOG_D("Acquire: true");
+			ReadyData();
 		}
-		break;
-	default:
-		break;
+		else
+			LOG_D("Acquire: false");
 	}
+
 	return false;
 }
 
-void GInputSystem::SwapBuf()
+void GInputSystem::SwapKeyBuf()
 {
 	char* tmp_buf = m_pPreKeyBuf;
 	m_pPreKeyBuf = m_pCurKeyBuf;
 	m_pCurKeyBuf = tmp_buf;
+}
+
+void GInputSystem::SwapMouseBuf()
+{
 	DIMOUSESTATE2* tmp_mbuf = m_pPreMoustState;
 	m_pPreMoustState = m_pCurMouseState;
 	m_pCurMouseState = tmp_mbuf;
 }
+
+
+
+#pragma warning(pop)

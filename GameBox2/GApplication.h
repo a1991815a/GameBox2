@@ -17,6 +17,7 @@ struct GWINPROCESS{
 
 class GApplication{
 	friend LRESULT CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM );
+	friend GApplication* dxGetApp();
 public:
 	GApplication(const GString& name, int x, int y, int cx, int cy);
 	~GApplication();
@@ -34,8 +35,8 @@ public:
 	void DestroyWindow();
 	void Exit();
 
-	void RegisterProcess(GWinProcessor* instance, process_t func);
-	void UnregisterProcess(GWinProcessor* instance);
+	void RegisterProcess(void* instance, process_t func);
+	void UnregisterProcess(void* instance);
 private:
 	HWND							m_hWnd;						//当前主窗口
 	GString							m_strName;					//窗口名

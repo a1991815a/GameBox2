@@ -80,6 +80,18 @@ public:
 		m_sUsePoolSet.erase(itor);
 	};
 
+	//回收所有对象(并不释放内存)
+	void freeAll() {
+		auto itor = m_sUsePoolSet.begin();
+		for (; itor != m_sUsePoolSet.end(); ++itor)
+		{
+			(*itor)->~value_type();
+			memset(*itor, 0, sizeof(value_type));
+			m_vFreePoolVector.push_back(*itor);
+		}
+		m_sUsePoolSet.clear();
+	};
+
 	//回收所有对象并释放所有内存
 	void clear(){
 		for (auto itor = m_sUsePoolSet.begin(); itor != m_sUsePoolSet.end(); ++itor)
